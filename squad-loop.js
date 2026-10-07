@@ -1,0 +1,6 @@
+/* Data-driven continuous encounter order. A cycle is ten ordinary encounters and one boss. */
+(function(root){
+ const rules={rewards:{normalGold:[8,12,16,20],normalAfterlight:[2,3,4,5],bossGold:60,bossAfterlight:15,normalSkillChance:.01,bossSkillChance:.6,skillPool:['vigor','control','agility','lucky','tenacity','emergency','diligence','adapt']},normalBattles:10,normalOrder:[0,0,1,0,1,2,1,2,3,3],bossTemplate:4,enemyGrowth:{hpPerCycle:.12,attackPerCycle:.08},resourceRegen:{mana:1/6,stamina:1/4},growth:{maxLevel:500,xpBase:40,xpPerLevel:12,perLevel:{hp:12,stamina:3,mana:3,agility:.8,luck:.3},captainAttackPerLevel:.5}};
+ function encounter(templates,wave){if(!Number.isSafeInteger(wave)||wave<0)throw Error('連戰進度無效');const size=rules.normalBattles+1,cycle=Math.floor(wave/size),position=wave%size,index=position===rules.normalBattles?rules.bossTemplate:rules.normalOrder[position];const source=templates[index];return {...source,templateIndex:index,cycle:cycle+1,position:position+1,battleNumber:wave+1,hp:Math.round(source.hp*(1+cycle*rules.enemyGrowth.hpPerCycle)),attack:source.attack*(1+cycle*rules.enemyGrowth.attackPerCycle),exp:Math.round((source.boss?100:[18,24,32,40][index])*(1+cycle*.25))};}
+ const api={rules,encounter};root.SquadLoop=api;if(typeof module!=='undefined')module.exports=api;
+})(globalThis);
