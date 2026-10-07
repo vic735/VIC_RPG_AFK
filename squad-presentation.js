@@ -23,8 +23,8 @@
   check:'<path d="m4 12 5 5L20 6"/>'
  };
  function icon(name){return `<svg class="ui-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.star}</svg>`;}
- function portrait(type,grade='C−'){
-  const colors={guard:['#739baf','#bddbe0'],striker:['#a9815a','#efc587'],mender:['#659ca1','#b5dfd1'],captain:['#718aab','#d5c49e']},[base,light]=colors[type]||colors.captain;
+ function portrait(type,grade='C−'){const originalType=type;type=root.SquadPrototype?.config.troops[type]?.archetype||type;
+  const colors={guard:['#739baf','#bddbe0'],striker:['#a9815a','#efc587'],mender:['#659ca1','#b5dfd1'],captain:['#718aab','#d5c49e']},[base,light]=originalType!==type?[root.SquadPrototype.config.troops[originalType].color,'#ddd6bc']:(colors[type]||colors.captain);
   const hair=type==='mender'?'<path d="M27 37c-1-26 48-26 45 0l-7 17-2-24-23-4-8 25Z" fill="#b5c3c6"/>':'<path d="M28 32c1-22 43-26 45 3L54 21 32 42Z" fill="#2a3344"/>';
   const accessory=type==='guard'?`<path d="m18 48 29 8-4 33-24-13Z" fill="${light}" stroke="#354d67" stroke-width="3"/><path d="M31 58v16m-6-9h13" stroke="${base}" stroke-width="2"/>`:type==='mender'?'<path d="m77 87 1-52" stroke="#d0bb83" stroke-width="4"/><path d="m77 24 8 9-8 9-8-9Z" fill="#a1f0dc"/>':'<path d="m73 84 12-48 5-13 3 15-14 48Z" fill="#e2d6b1"/><path d="m68 73 19 5" stroke="#967141" stroke-width="4"/>';
   return `<svg class="member-portrait" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="16" fill="#132437"/><path d="m4 81 39-73 52 87" fill="${base}" opacity=".16"/><circle cx="52" cy="38" r="23" fill="${light}" opacity=".09"/><path d="M17 101 28 59l23-8 24 9 13 41" fill="${base}"/><path d="m37 58 14 32 17-31-16 7Z" fill="#1a2d3a"/><path d="M44 43h16v21l-8 6-8-5" fill="#c7a486"/><ellipse cx="51" cy="36" rx="18" ry="22" fill="#d4b297"/>${hair}<path d="m40 39 6-1m12 0 5 1" stroke="#38475a" stroke-width="2"/><path d="m48 51 8 0" stroke="#a37764" stroke-width="1.5"/>${accessory}<path d="M1 99h98" stroke="${light}" stroke-width="3"/></svg>`;

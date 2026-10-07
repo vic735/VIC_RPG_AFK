@@ -52,6 +52,8 @@
   emit(event,extra={}){const ctx=this.context(extra);for(const h of this.hooks.get(event)||[]){const key=h.source+':'+event;if(h.once&&this.once.has(key)||!matches(h.conditions,ctx))continue;if(h.once)this.once.add(key);const previousSource=ctx.sourceId;ctx.sourceId=h.source;let triggered=false;for(const e of h.effects||[]){const handler=effects[e.type];if(!handler)throw Error('Unknown effect '+e.type);triggered=handler(this.battle,ctx,e)!==false||triggered;}ctx.sourceId=previousSource;if(triggered&&this.actor===this.battle.player)this.battle.contribution?.(h.source,'triggers');if(triggered)this.battle.log('skill',h.name,{actorId:this.actor.id,skillId:h.source,duration:.8});}return ctx;}
  }
  function applyStatus(b,actor,s,source,ctx={}){
+  // Squad NPCs have one attack stat; MP/SP are resources only for the captain.
+  if(b.squad&&s.tick&&['mana','stamina'].includes(s.tick.stat))s={...s,tick:{...s.tick,stat:source.id==='player'&&s.tick.stat==='mana'?'magicAttack':'attack'}};
   if(!s.id||!Number.isFinite(s.duration)||s.duration<=0)throw Error('狀態必須具有正數持續時間');
   if(s.tick&&(!Number.isFinite(s.tick.interval)||s.tick.interval<=0||!Number.isFinite(s.tick.ratio)||s.tick.ratio<0||!Object.hasOwn(source.stats,s.tick.stat)))throw Error('狀態週期格式無效');
   for(const m of s.modifiers||[])if(!Number.isFinite(m.value))throw Error('狀態修正必須為有限數值');
