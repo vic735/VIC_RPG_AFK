@@ -68,3 +68,8 @@
 
 /* Enemy HUD remains narrow; numeric HP is always readable. */
 .wave-heading .enemy-hp,.wave-heading .enemy-cast{width:72%;margin-left:auto}.wave-heading .enemy-health{font-size:2.6cqw;font-variant-numeric:tabular-nums;color:#eac8bd}.squad-controls{contain:paint}.squad-controls .dir-0,.squad-controls .dir-2{right:auto}.squad-controls .dir-0{bottom:auto}.squad-controls .dir-2{top:auto}
+
+/* Reserve the top-right strip for enemy HUD, above all actor silhouettes. */
+.wave-heading{top:20%;left:64%;right:3%;text-align:right}.wave-heading strong{font-size:2.7cqw;line-height:1.2;margin:.25cqw 0}.wave-heading small,.wave-heading>span{font-size:2.1cqw;line-height:1.2}.wave-heading .enemy-hp,.wave-heading .enemy-cast{width:100%;height:1cqw;margin-top:.35cqw}.wave-heading .enemy-health{font-size:2.2cqw}
+
+.fragment-wallet{display:flex;flex-wrap:wrap;gap:2cqw;margin:2cqw 0 3cqw}.fragment-wallet span{font-size:2.7cqw;border:1px solid var(--line);border-radius:8px;padding:1.5cqw 2cqw;color:#b6c6d1;background:#14273c}.fragment-wallet b{color:#e2c78f}.cultivation-summary{margin-top:3cqw;padding-top:3cqw;border-top:1px solid var(--line)}.cultivation-summary>strong,.cultivation-summary>small{display:block;margin-top:1cqw}.cultivation-summary>strong{font-size:3.3cqw;color:#e2c78f}
