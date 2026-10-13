@@ -1,4 +1,4 @@
-const VERSION="38a44597552e18ea", RELEASE="0.30.46", ASSETS=["./index.html","./PLAY.html","./squad.html","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
+const VERSION="146da1dba235f495", RELEASE="0.30.47", ASSETS=["./index.html","./PLAY.html","./squad.html","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
 const PREFIX='afterlight-'+encodeURIComponent(self.registration.scope)+'-',CACHE=PREFIX+VERSION;
 const inScope=url=>{const scope=new URL(self.registration.scope);return url.origin===scope.origin&&url.pathname.startsWith(scope.pathname);};
 const knownAsset=url=>{const scope=new URL(self.registration.scope),relative='./'+url.pathname.slice(scope.pathname.length);return relative==='./'||ASSETS.includes(relative);};
